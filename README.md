@@ -18,7 +18,7 @@
 
 ## Author
 
-👤 **Abimbola**
+👤 **Abimbola Aminat Buari**
 
 - GitHub: [bimbolabuari](https://github.com/bimbolabuari)
 - Twitter: [bimbolabuari](https://twitter.com/bimbolabuari)
