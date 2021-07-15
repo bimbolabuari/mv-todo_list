@@ -20,9 +20,13 @@ body {
   position: relative;
 }
 
-.flex {
+.justify-content {
   display: flex;
   justify-content: space-between;
+}
+
+.flex {
+  display: flex;
 }
 
 .header {
@@ -55,8 +59,11 @@ body {
 
 .task {
   align-items: center;
-  width: 40%;
   font-family: "Roboto", sans-serif;
+}
+
+.task p {
+  margin-left: 15px;
 }
 
 .footer {
