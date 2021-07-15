@@ -8,7 +8,7 @@ import footer from './footer.js';
 const startApp = () => {
   const tasksArray = [
     {
-      description: 'Wash the plates',
+      description: 'Go groceries shopping',
       completed: false,
       index: 0,
     },
@@ -18,7 +18,7 @@ const startApp = () => {
       index: 1,
     },
     {
-      description: 'Wash the plates',
+      description: 'Do my laundry',
       completed: false,
       index: 2,
     },
@@ -27,13 +27,13 @@ const startApp = () => {
 
   const createTaskElement = (task) => {
     const taskElement = document.createElement('li');
-    taskElement.classList.add('flex', 'tasklist');
+    taskElement.classList.add('flex', 'tasklist', 'justify-content');
     taskElement.innerHTML = `
-          <div class="flex task">
+          <label class="flex task">
           <input type="checkbox" value='${task.completed}' data-action="complete">
           <p>${task.description}</p>
-          </div>
-          <i class="fa fa-ellipsis-v icon" data-action="drag"></i>
+          </label>
+          <i class="fa fa-ellipsis-v icon" data-action="delete"></i>
           `;
     return taskElement;
   };
