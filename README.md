@@ -24,11 +24,40 @@
 - Twitter: [bimbolabuari](https://twitter.com/bimbolabuari)
 - LinkedIn: [bimbolabuari](https://linkedin.com/in/bimbolabuari)
 
+### Development (Running locally)
+
+- Clone the project
+
+```bash
+git clone https://github.com/bimbolabuari/mv-todo_list.git
+
+```
+
+- Install Dependencies
+
+```bash
+npm install
+```
+
+To run check against Stylelint, you may run the lint task:
+
+```bash
+npx stylelint "**/*.{css,scss}"
+```
+
+You can also check against HTML Validator:
+
+```bash
+npx hint --telemetry=off .
+```
+
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](../../issues/).
+
 
 ## Show your support
 
