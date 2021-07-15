@@ -3,7 +3,7 @@ header.classList.add('header');
 header.innerHTML = `
 <nav class="flex">
     <p>Today's To Do</p>
-    <img src="../image/reload.svg" class="svg">
+    <i class="fa fa-retweet"></i>
 </nav>
 `;
 
