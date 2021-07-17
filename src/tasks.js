@@ -1,21 +1,24 @@
 const generateId = () => (Math.random() + 1).toString(36).substring(7);
 
-export function Task(description) {
-  this.description = description;
-  this.completed = true;
-  this.id = generateId();
-  this.changeCompletedStatus = () => {
+export const Task = (description) => {
+  const completedStatus = false;
+  const id = generateId();
+  function changeCompletedStatus() {
     this.completedStatus = !this.completedStatus;
+  }
+  return {
+    description, completedStatus, id, changeCompletedStatus,
   };
-}
+};
 
-const taskOne = new Task('Go groceries shopping');
-const taskTwo = new Task('Wash the plates');
-const taskThree = new Task('Do my laundry');
+const taskOne = Task('Go groceries shopping');
+const taskTwo = Task('Wash the plates');
+const taskThree = Task('Do my laundry');
 
 let tasksArray;
 
 const createTaskElement = (task) => {
+  const isCompleted = task.completedStatus;
   const taskElement = document.createElement('li');
   taskElement.id = `${task.id}`;
   taskElement.setAttribute('draggable', true);
@@ -23,9 +26,9 @@ const createTaskElement = (task) => {
   taskElement.classList.add('flex', 'tasklist', 'justify-content');
   taskElement.innerHTML = `
           <label class="flex task">
-          <input type="checkbox" value='${task.completed}' data-action="uncheck" id="uncheck" data-task-id="${task.id}">
-          <i class="fa fa-check checkIcon none"></i>
-          <p class="task-description">${task.description}</p>
+          <input type="checkbox" value='${isCompleted}' data-action="uncheck" class="check-box ${isCompleted ? 'none' : ''}" data-task-id="${task.id}">
+          <i class="fa fa-check checkIcon ${isCompleted ? '' : 'none'}"></i>
+          <p class="task-description ${isCompleted ? 'checked' : ''}">${task.description}</p>
           </label>
           <i class="fa fa-ellipsis-v editIcon icon" data-action="edit" data-task-id="${task.id}"></i>
           <i class="fa fa-trash deleteIcon icon none" data-action="delete" data-task-id="${task.id}"></i>

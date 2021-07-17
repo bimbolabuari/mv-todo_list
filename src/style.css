@@ -18,6 +18,7 @@ body {
   height: 60vh;
   background-color: #fff;
   position: relative;
+  border-radius: 4px;
 }
 
 .justify-content {
@@ -44,6 +45,10 @@ body {
   width: 100%;
   outline: none;
   font-family: "Dancing Script", cursive;
+}
+
+.task-description {
+  outline: none;
 }
 
 .form,
@@ -83,10 +88,28 @@ body {
   font-size: 18px;
 }
 
+.checked {
+  text-decoration: line-through;
+}
+
 .icon {
   font-size: 15px;
 }
 
 .svg {
   width: 20px;
+}
+
+.hover {
+  opacity: 0.5;
+  background-color: #aaa;
+}
+
+.dragstart {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+
+.none {
+  display: none;
 }
