@@ -4,48 +4,17 @@ import './style.css';
 import header from './header.js';
 import form from './input.js';
 import footer from './footer.js';
+import updateStatus from './updateStatus.js';
+import dragAndDropHandler from './drag.js';
+import { getTasksArray, displayTaskArray } from './tasks.js';
 
 const startApp = () => {
-  const tasksArray = [
-    {
-      description: 'Go groceries shopping',
-      completed: false,
-      index: 0,
-    },
-    {
-      description: 'Wash the plates',
-      completed: false,
-      index: 1,
-    },
-    {
-      description: 'Do my laundry',
-      completed: false,
-      index: 2,
-    },
-  ];
+  const tasksArray = getTasksArray();
+  // console.log(tasksArray);
   const taskContainer = document.createElement('ul');
+  taskContainer.classList.add('taskContainer');
 
-  const createTaskElement = (task) => {
-    const taskElement = document.createElement('li');
-    taskElement.classList.add('flex', 'tasklist', 'justify-content');
-    taskElement.innerHTML = `
-          <label class="flex task">
-          <input type="checkbox" value='${task.completed}' data-action="complete">
-          <p>${task.description}</p>
-          </label>
-          <i class="fa fa-ellipsis-v icon" data-action="delete"></i>
-          `;
-    return taskElement;
-  };
-
-  const displayTask = (task, taskContainer) => {
-    const newTaskElement = createTaskElement(task);
-    taskContainer.appendChild(newTaskElement);
-  };
-
-  tasksArray.forEach((task) => {
-    displayTask(task, taskContainer);
-  });
+  displayTaskArray(tasksArray, taskContainer);
 
   const displayPage = () => {
     const mainContainer = document.querySelector('#content');
@@ -53,6 +22,22 @@ const startApp = () => {
   };
 
   displayPage();
+  dragAndDropHandler();
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.dataset.action) {
+      return;
+    }
+
+    const { taskId } = event.target.dataset;
+
+    if (event.target.dataset.action === 'uncheck') {
+      const taskDescription = event.target.parentElement.querySelector('.task-description');
+      const taskCheck = event.target.parentElement.querySelector('.check-box');
+      const checkIcon = event.target.parentElement.querySelector('.checkIcon');
+      updateStatus(taskId, taskDescription, tasksArray, checkIcon, taskCheck);
+    }
+  });
 };
 
 export default startApp;
