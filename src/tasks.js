@@ -1,7 +1,17 @@
 const generateId = () => (Math.random() + 1).toString(36).substring(7);
 
+const generateIndex = () => {
+  if (localStorage.getItem('tasksArray') === null) {
+    return 0;
+  }
+  const storedTasksArray = JSON.parse(localStorage.getItem('tasksArray'));
+  return storedTasksArray.length;
+};
+
 export const Task = (taskData) => {
-  const { description, completedStatus = false, id = generateId() } = taskData;
+  const {
+    description, completedStatus = false, id = generateId(), index = generateIndex(),
+  } = taskData;
   function changeCompletedStatus() {
     this.completedStatus = !this.completedStatus;
   }
@@ -9,15 +19,15 @@ export const Task = (taskData) => {
     this.description = newDescription;
   }
   return {
-    description, completedStatus, id, changeCompletedStatus, setDescription,
+    description, completedStatus, id, changeCompletedStatus, setDescription, index,
   };
 };
 
 const parseTasks = (tasks) => tasks.map(Task);
 
-const taskOne = Task({ description: 'Go groceries shopping' });
-const taskTwo = Task({ description: 'Wash the plates' });
-const taskThree = Task({ description: 'Do my laundry' });
+// const taskOne = Task({ description: 'Go groceries shopping' });
+// const taskTwo = Task({ description: 'Wash the plates' });
+// const taskThree = Task({ description: 'Do my laundry' });
 
 let tasksArray;
 
@@ -55,7 +65,7 @@ export const displayTaskArray = (tasks, taskContainerEl) => {
 
 export const getTasksArray = () => {
   if (localStorage.getItem('tasksArray') === null) {
-    tasksArray = [taskOne, taskTwo, taskThree];
+    tasksArray = [];
   } else {
     tasksArray = JSON.parse(localStorage.getItem('tasksArray'));
     tasksArray = parseTasks(tasksArray);
