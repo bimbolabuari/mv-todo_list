@@ -21,6 +21,10 @@ body {
   border-radius: 4px;
 }
 
+.color {
+  background-color: coral;
+}
+
 .justify-content {
   display: flex;
   justify-content: space-between;
@@ -37,6 +41,13 @@ body {
   padding: 20px 20px 30px;
   font-size: 20px;
   font-weight: 500;
+}
+
+.edit-container {
+  width: 15%;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
 }
 
 .input {
@@ -65,6 +76,7 @@ body {
 .task {
   align-items: center;
   font-family: "Roboto", sans-serif;
+  cursor: text;
 }
 
 .task p {
@@ -81,6 +93,7 @@ body {
   display: flex;
   justify-content: center;
   max-width: 500px;
+  cursor: pointer;
 }
 
 .button {
@@ -94,6 +107,10 @@ body {
 
 .icon {
   font-size: 15px;
+}
+
+.deleteIcon {
+  font-size: 25px;
 }
 
 .svg {
