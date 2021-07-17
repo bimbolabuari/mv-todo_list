@@ -12,10 +12,9 @@ import {
 import { editTask, deleteTask } from './addAndRemove.js';
 
 const startApp = () => {
-  const tasksArray = getTasksArray();
   const taskContainer = document.createElement('ul');
   taskContainer.classList.add('taskContainer');
-  displayTaskArray(tasksArray, taskContainer);
+  displayTaskArray(getTasksArray(), taskContainer);
 
   const displayPage = () => {
     const mainContainer = document.querySelector('#content');
@@ -29,8 +28,8 @@ const startApp = () => {
     event.preventDefault();
     const description = document.querySelector('.input').value;
     const newTask = Task({ description });
-
-    const newTasks = tasksArray.concat(newTask);
+    const currentTasksArray = getTasksArray();
+    const newTasks = currentTasksArray.concat(newTask);
     setTasksArray(newTasks);
     reRenderTask(newTasks, taskContainer);
     form.reset();
@@ -47,18 +46,18 @@ const startApp = () => {
       const taskDescription = event.target.parentElement.querySelector('.task-description');
       const taskCheck = event.target.parentElement.querySelector('.check-box');
       const checkIcon = event.target.parentElement.querySelector('.checkIcon');
-      updateStatus(taskId, taskDescription, tasksArray, checkIcon, taskCheck);
+      updateStatus(taskId, taskDescription, checkIcon, taskCheck);
     }
 
     if (event.target.dataset.action === 'delete') {
-      deleteTask(taskId, tasksArray);
+      deleteTask(taskId, getTasksArray());
     }
 
     if (event.target.dataset.action === 'edit') {
       const taskDescription = event.target.parentElement.querySelector('.task-description');
       const editIcon = event.target.parentElement.querySelector('.editIcon');
       const deleteIcon = event.target.parentElement.querySelector('.deleteIcon');
-      editTask(taskDescription, editIcon, deleteIcon, tasksArray, taskId);
+      editTask(taskDescription, editIcon, deleteIcon, getTasksArray(), taskId);
     }
 
     if (event.target.dataset.action === 'deleteCompleted') {

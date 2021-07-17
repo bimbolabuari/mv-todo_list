@@ -1,7 +1,19 @@
-const updateStatus = (id, taskDescription, tasksArray, checkIcon, taskCheck) => {
-  const currentTaskIndex = tasksArray.findIndex((task) => task.id === id);
-  tasksArray[currentTaskIndex].changeCompletedStatus();
-  if (tasksArray[currentTaskIndex].completedStatus) {
+import { getTasksArray, setTasksArray } from './tasks.js';
+
+const updateStatus = (id, taskDescription, checkIcon, taskCheck) => {
+  let currentTask;
+  const tasksArray = getTasksArray();
+  const newTasksArray = tasksArray.map((task) => {
+    if (task.id === id) {
+      task.changeCompletedStatus();
+      currentTask = task;
+    }
+    return task;
+  });
+  setTasksArray(newTasksArray);
+
+  // currentTask.changeCompletedStatus();
+  if (currentTask.completedStatus) {
     taskDescription.classList.add('checked');
     taskCheck.classList.add('none');
     checkIcon.classList.remove('none');
