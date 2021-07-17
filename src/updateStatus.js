@@ -11,8 +11,6 @@ const updateStatus = (id, taskDescription, checkIcon, taskCheck) => {
     return task;
   });
   setTasksArray(newTasksArray);
-
-  // currentTask.changeCompletedStatus();
   if (currentTask.completedStatus) {
     taskDescription.classList.add('checked');
     taskCheck.classList.add('none');

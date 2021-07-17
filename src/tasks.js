@@ -25,10 +25,6 @@ export const Task = (taskData) => {
 
 const parseTasks = (tasks) => tasks.map(Task);
 
-// const taskOne = Task({ description: 'Go groceries shopping' });
-// const taskTwo = Task({ description: 'Wash the plates' });
-// const taskThree = Task({ description: 'Do my laundry' });
-
 let tasksArray;
 
 const createTaskElement = (task) => {
