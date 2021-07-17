@@ -5,15 +5,16 @@ import header from './header.js';
 import form from './input.js';
 import footer from './footer.js';
 import updateStatus from './updateStatus.js';
-import dragAndDropHandler from './drag.js';
-import { getTasksArray, displayTaskArray } from './tasks.js';
+import dragAndDropHandler, { reRenderTask } from './drag.js';
+import {
+  getTasksArray, displayTaskArray, deleteCompletedTasks, setTasksArray, Task,
+} from './tasks.js';
+import { editTask, deleteTask } from './addAndRemove.js';
 
 const startApp = () => {
   const tasksArray = getTasksArray();
-  // console.log(tasksArray);
   const taskContainer = document.createElement('ul');
   taskContainer.classList.add('taskContainer');
-
   displayTaskArray(tasksArray, taskContainer);
 
   const displayPage = () => {
@@ -23,6 +24,17 @@ const startApp = () => {
 
   displayPage();
   dragAndDropHandler();
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const description = document.querySelector('.input').value;
+    const newTask = Task({ description });
+
+    const newTasks = tasksArray.concat(newTask);
+    setTasksArray(newTasks);
+    reRenderTask(newTasks, taskContainer);
+    form.reset();
+  });
 
   document.addEventListener('click', (event) => {
     if (!event.target.dataset.action) {
@@ -36,6 +48,22 @@ const startApp = () => {
       const taskCheck = event.target.parentElement.querySelector('.check-box');
       const checkIcon = event.target.parentElement.querySelector('.checkIcon');
       updateStatus(taskId, taskDescription, tasksArray, checkIcon, taskCheck);
+    }
+
+    if (event.target.dataset.action === 'delete') {
+      deleteTask(taskId, tasksArray);
+    }
+
+    if (event.target.dataset.action === 'edit') {
+      const taskDescription = event.target.parentElement.querySelector('.task-description');
+      const editIcon = event.target.parentElement.querySelector('.editIcon');
+      const deleteIcon = event.target.parentElement.querySelector('.deleteIcon');
+      editTask(taskDescription, editIcon, deleteIcon, tasksArray, taskId);
+    }
+
+    if (event.target.dataset.action === 'deleteCompleted') {
+      const uncompletedTasks = deleteCompletedTasks();
+      reRenderTask(uncompletedTasks, taskContainer);
     }
   });
 };
