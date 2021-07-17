@@ -1,7 +1,7 @@
 import reorderTasks from './sort.js';
 import { getTasksArray, setTasksArray, displayTaskArray } from './tasks.js';
 
-const reRenderTask = (tasks, taskContainerEl) => {
+export const reRenderTask = (tasks, taskContainerEl) => {
   while (taskContainerEl.firstChild) {
     taskContainerEl.removeChild(taskContainerEl.firstChild);
   }

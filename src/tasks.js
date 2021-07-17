@@ -1,19 +1,23 @@
 const generateId = () => (Math.random() + 1).toString(36).substring(7);
 
-export const Task = (description) => {
-  const completedStatus = false;
-  const id = generateId();
+export const Task = (taskData) => {
+  const { description, completedStatus = false, id = generateId() } = taskData;
   function changeCompletedStatus() {
     this.completedStatus = !this.completedStatus;
   }
+  function setDescription(newDescription) {
+    this.description = newDescription;
+  }
   return {
-    description, completedStatus, id, changeCompletedStatus,
+    description, completedStatus, id, changeCompletedStatus, setDescription,
   };
 };
 
-const taskOne = Task('Go groceries shopping');
-const taskTwo = Task('Wash the plates');
-const taskThree = Task('Do my laundry');
+const parseTasks = (tasks) => tasks.map(Task);
+
+const taskOne = Task({ description: 'Go groceries shopping' });
+const taskTwo = Task({ description: 'Wash the plates' });
+const taskThree = Task({ description: 'Do my laundry' });
 
 let tasksArray;
 
@@ -30,8 +34,10 @@ const createTaskElement = (task) => {
           <i class="fa fa-check checkIcon ${isCompleted ? '' : 'none'}"></i>
           <p class="task-description ${isCompleted ? 'checked' : ''}">${task.description}</p>
           </label>
-          <i class="fa fa-ellipsis-v editIcon icon" data-action="edit" data-task-id="${task.id}"></i>
-          <i class="fa fa-trash deleteIcon icon none" data-action="delete" data-task-id="${task.id}"></i>
+          <div data-action='edit' data-task-id="${task.id}" class="'${isCompleted}' edit-container">
+          <i class="fa fa-ellipsis-v editIcon icon ${isCompleted ? 'none' : ''}" data-task-id="${task.id}"></i>
+          <i class="fa fa-trash deleteIcon ${isCompleted ? '' : 'none'}" data-action="delete" data-task-id="${task.id}"></i>
+         </div>
           `;
   return taskElement;
 };
@@ -52,10 +58,18 @@ export const getTasksArray = () => {
     tasksArray = [taskOne, taskTwo, taskThree];
   } else {
     tasksArray = JSON.parse(localStorage.getItem('tasksArray'));
+    tasksArray = parseTasks(tasksArray);
   }
   return tasksArray;
 };
 
 export const setTasksArray = (newTasksArray) => {
   localStorage.setItem('tasksArray', JSON.stringify(newTasksArray));
+};
+
+export const deleteCompletedTasks = () => {
+  tasksArray = getTasksArray();
+  tasksArray = tasksArray.filter((task) => task.completedStatus !== true);
+  setTasksArray(tasksArray);
+  return tasksArray;
 };
