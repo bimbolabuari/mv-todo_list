@@ -1,6 +1,6 @@
 # TODO-LIST PROJECT
 
-> This project is a Microverse exercise on Webpack that showcase the knowledge of HTML, CSS, Webpack Configuration, Jaavascript, import and export modules, string interpolation, arrays, objects, ES6 syntax.
+> This project is a Microverse exercise on Webpack that showcase the knowledge of HTML, CSS, Webpack Configuration, Jaavascript, import and export modules, string interpolation, arrays, objects, ES6 syntax, eventlisteners, localstorage.
 
 ![screenshot](screenshot.png)
 
