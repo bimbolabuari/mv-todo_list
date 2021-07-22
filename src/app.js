@@ -24,7 +24,7 @@ const startApp = () => {
   displayPage();
   dragAndDropHandler();
 
-  form.addEventListener('submit', (event) => {
+  const addTask = (event) => {
     event.preventDefault();
     const description = document.querySelector('.input').value;
     const newTask = Task({ description });
@@ -33,7 +33,9 @@ const startApp = () => {
     setTasksArray(newTasks);
     reRenderTask(newTasks, taskContainer);
     form.reset();
-  });
+  };
+
+  form.addEventListener('submit', addTask);
 
   document.addEventListener('click', (event) => {
     if (!event.target.dataset.action) {

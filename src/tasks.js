@@ -1,6 +1,6 @@
-const generateId = () => (Math.random() + 1).toString(36).substring(7);
+export const generateId = () => (Math.random() + 1).toString(36).substring(7);
 
-const generateIndex = () => {
+export const generateIndex = () => {
   if (localStorage.getItem('tasksArray') === null) {
     return 0;
   }
@@ -48,7 +48,7 @@ const createTaskElement = (task) => {
   return taskElement;
 };
 
-const displayTask = (task, taskContainerEl) => {
+export const displayTask = (task, taskContainerEl) => {
   const newTaskElement = createTaskElement(task);
   taskContainerEl.appendChild(newTaskElement);
 };
