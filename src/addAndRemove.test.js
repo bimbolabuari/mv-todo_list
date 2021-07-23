@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { deleteTask } from './addAndRemove.js';
 import { addTask } from './app.js';
 import document from './index.html';
