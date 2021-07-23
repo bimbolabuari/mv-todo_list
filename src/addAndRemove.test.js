@@ -1,7 +1,8 @@
 import { deleteTask } from './addAndRemove.js';
 import displayTask, { generateId, Task } from './tasks.js';
 
-// jest.mock('./tasks.js');
+
+// import document from './index.html';
 
 describe('deleteTask()', () => {
   test('remove an object from tasksArray', () => {
@@ -58,9 +59,10 @@ describe('Add object to taskArray', () => {
 
   test('does not allow an empty value added to task array', () => {
     const tasksArray = [];
-    document.body.innerHTML = `
-         <input type="text" class="input" placeholder="Add to your list...">
-        `;
+    document.body.innerHTML = 
+    `
+      <input type="text" class="input" placeholder="Add to your list...">
+    `;
     const task = new Task();
     displayTask(task, tasksArray);
     expect(task[0].description).toBe('');
