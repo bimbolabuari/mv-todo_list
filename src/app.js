@@ -1,7 +1,4 @@
 // eslint-disable-next-line no-unused-vars
-import './style.css';
-import form from './input.js';
-import footer from './footer.js';
 import updateStatus from './updateStatus.js';
 import dragAndDropHandler, { reRenderTask } from './drag.js';
 import {
@@ -19,7 +16,6 @@ export const addTask = (event) => {
   const newTasks = currentTasksArray.concat(newTask);
   setTasksArray(newTasks);
   reRenderTask(newTasks, taskContainer);
-  form.reset();
 };
 
 const startApp = () => {
@@ -27,12 +23,12 @@ const startApp = () => {
 
   const displayPage = () => {
     const mainContainer = document.querySelector('#content');
-    mainContainer.append(taskContainer, footer);
+    mainContainer.append(taskContainer);
   };
 
   displayPage();
   dragAndDropHandler();
-
+  const form = document.querySelector('.input');
   form.addEventListener('submit', addTask);
 
   document.addEventListener('click', (event) => {
