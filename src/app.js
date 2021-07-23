@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import _ from 'lodash';
 import './style.css';
-import header from './header.js';
 import form from './input.js';
 import footer from './footer.js';
 import updateStatus from './updateStatus.js';
@@ -12,13 +11,12 @@ import {
 import { editTask, deleteTask } from './addAndRemove.js';
 
 const startApp = () => {
-  const taskContainer = document.createElement('ul');
-  taskContainer.classList.add('taskContainer');
+  const taskContainer = document.querySelector('.taskContainer');
   displayTaskArray(getTasksArray(), taskContainer);
 
   const displayPage = () => {
     const mainContainer = document.querySelector('#content');
-    mainContainer.append(header, form, taskContainer, footer);
+    mainContainer.append(taskContainer, footer);
   };
 
   displayPage();

@@ -1,8 +1,7 @@
 import { deleteTask } from './addAndRemove.js';
 import displayTask, { generateId, Task } from './tasks.js';
-import form from './input.js';
 
-jest.mock('./tasks.js');
+// jest.mock('./tasks.js');
 
 describe('deleteTask()', () => {
   test('remove an object from tasksArray', () => {
@@ -18,11 +17,6 @@ describe('deleteTask()', () => {
         id: generateId(),
       }];
     const id = generateId();
-
-    Task.mockImplementation(() => true);
-
-    delete window.location;
-    window.location = { reload: jest.fn() };
 
     deleteTask(id, tasksArray);
 
@@ -42,12 +36,7 @@ describe('deleteTask()', () => {
         id: generateId(),
       }];
     const id = generateId();
-
-    Task.mockImplementation(() => true);
-
-    delete window.location;
-    window.location = { reload: jest.fn() };
-
+    
     deleteTask(id, tasksArray);
 
     expect(tasksArray[0].description).toBe('two');
@@ -57,14 +46,9 @@ describe('deleteTask()', () => {
 describe('Add object to taskArray', () => {
   test('Add object to the tasksArray', () => {
     const tasksArray = [];
-    form.innerHTML = `
+    document.body.innerHTML = `
       <input type="text" class="input" placeholder="Add to your list...">
      `;
-
-    Task.mockImplementation(() => true);
-
-    delete window.location;
-    window.location = { reload: jest.fn() };
 
     const task = new Task();
     displayTask(task, tasksArray);
@@ -74,14 +58,9 @@ describe('Add object to taskArray', () => {
 
   test('does not allow an empty value added to task array', () => {
     const tasksArray = [];
-    form.innerHTML = `
+    document.body.innerHTML = `
          <input type="text" class="input" placeholder="Add to your list...">
         `;
-
-    Task.mockImplementation(() => true);
-
-    delete window.location;
-    window.location = { reload: jest.fn() };
     const task = new Task();
     displayTask(task, tasksArray);
     expect(task[0].description).toBe('');
