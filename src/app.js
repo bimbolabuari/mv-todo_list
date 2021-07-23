@@ -1,5 +1,4 @@
 // eslint-disable-next-line no-unused-vars
-import _ from 'lodash';
 import './style.css';
 import form from './input.js';
 import footer from './footer.js';
@@ -23,7 +22,6 @@ export const addTask = (event) => {
   form.reset();
 };
 
-
 const startApp = () => {
   displayTaskArray(getTasksArray(), taskContainer);
 
@@ -35,11 +33,7 @@ const startApp = () => {
   displayPage();
   dragAndDropHandler();
 
-
   form.addEventListener('submit', addTask);
-
-  
-
 
   document.addEventListener('click', (event) => {
     if (!event.target.dataset.action) {
