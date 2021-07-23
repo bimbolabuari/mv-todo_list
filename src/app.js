@@ -10,8 +10,21 @@ import {
 } from './tasks.js';
 import { editTask, deleteTask } from './addAndRemove.js';
 
+const taskContainer = document.querySelector('.taskContainer');
+
+export const addTask = (event) => {
+  event.preventDefault();
+  const description = document.querySelector('.input').value;
+  const newTask = Task({ description });
+  const currentTasksArray = getTasksArray();
+  const newTasks = currentTasksArray.concat(newTask);
+  setTasksArray(newTasks);
+  reRenderTask(newTasks, taskContainer);
+  form.reset();
+};
+
+
 const startApp = () => {
-  const taskContainer = document.querySelector('.taskContainer');
   displayTaskArray(getTasksArray(), taskContainer);
 
   const displayPage = () => {
@@ -22,18 +35,11 @@ const startApp = () => {
   displayPage();
   dragAndDropHandler();
 
-  const addTask = (event) => {
-    event.preventDefault();
-    const description = document.querySelector('.input').value;
-    const newTask = Task({ description });
-    const currentTasksArray = getTasksArray();
-    const newTasks = currentTasksArray.concat(newTask);
-    setTasksArray(newTasks);
-    reRenderTask(newTasks, taskContainer);
-    form.reset();
-  };
 
   form.addEventListener('submit', addTask);
+
+  
+
 
   document.addEventListener('click', (event) => {
     if (!event.target.dataset.action) {
