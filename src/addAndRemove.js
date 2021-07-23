@@ -1,6 +1,6 @@
 export const deleteTask = (id, tasksArray) => {
   const newFilteredTask = tasksArray.filter((task) => task.id !== id);
-  const deleteTask = document.getElementById(`${id}`);
+  const deleteTask = tasksArray.filter((task) => task.id === id);
   deleteTask.remove();
   tasksArray = newFilteredTask;
   localStorage.setItem('tasksArray', JSON.stringify(tasksArray));
