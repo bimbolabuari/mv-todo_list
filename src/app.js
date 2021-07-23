@@ -1,9 +1,4 @@
 // eslint-disable-next-line no-unused-vars
-import _ from 'lodash';
-import './style.css';
-import header from './header.js';
-import form from './input.js';
-import footer from './footer.js';
 import updateStatus from './updateStatus.js';
 import dragAndDropHandler, { reRenderTask } from './drag.js';
 import {
@@ -11,29 +6,30 @@ import {
 } from './tasks.js';
 import { editTask, deleteTask } from './addAndRemove.js';
 
+const taskContainer = document.querySelector('.taskContainer');
+
+export const addTask = (event) => {
+  event.preventDefault();
+  const description = document.querySelector('.input').value;
+  const newTask = Task({ description });
+  const currentTasksArray = getTasksArray();
+  const newTasks = currentTasksArray.concat(newTask);
+  setTasksArray(newTasks);
+  reRenderTask(newTasks, taskContainer);
+};
+
 const startApp = () => {
-  const taskContainer = document.createElement('ul');
-  taskContainer.classList.add('taskContainer');
   displayTaskArray(getTasksArray(), taskContainer);
 
   const displayPage = () => {
     const mainContainer = document.querySelector('#content');
-    mainContainer.append(header, form, taskContainer, footer);
+    mainContainer.append(taskContainer);
   };
 
   displayPage();
   dragAndDropHandler();
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const description = document.querySelector('.input').value;
-    const newTask = Task({ description });
-    const currentTasksArray = getTasksArray();
-    const newTasks = currentTasksArray.concat(newTask);
-    setTasksArray(newTasks);
-    reRenderTask(newTasks, taskContainer);
-    form.reset();
-  });
+  const form = document.querySelector('.input');
+  form.addEventListener('submit', addTask);
 
   document.addEventListener('click', (event) => {
     if (!event.target.dataset.action) {
