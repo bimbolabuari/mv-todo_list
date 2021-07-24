@@ -1,6 +1,6 @@
-const generateId = () => (Math.random() + 1).toString(36).substring(7);
+export const generateId = () => (Math.random() + 1).toString(36).substring(7);
 
-const generateIndex = () => {
+export const generateIndex = () => {
   if (localStorage.getItem('tasksArray') === null) {
     return 0;
   }
@@ -12,11 +12,12 @@ export const Task = (taskData) => {
   const {
     description, completedStatus = false, id = generateId(), index = generateIndex(),
   } = taskData;
+
   function changeCompletedStatus() {
     this.completedStatus = !this.completedStatus;
   }
-  function setDescription(newDescription) {
-    this.description = newDescription;
+  function setDescription() {
+    this.description = !this.description;
   }
   return {
     description, completedStatus, id, changeCompletedStatus, setDescription, index,
@@ -48,7 +49,7 @@ const createTaskElement = (task) => {
   return taskElement;
 };
 
-const displayTask = (task, taskContainerEl) => {
+export const displayTask = (task, taskContainerEl) => {
   const newTaskElement = createTaskElement(task);
   taskContainerEl.appendChild(newTaskElement);
 };

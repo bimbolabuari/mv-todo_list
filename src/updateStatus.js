@@ -1,7 +1,7 @@
-import { getTasksArray, setTasksArray } from './tasks.js';
+import { getTasksArray, setTasksArray, Task } from './tasks.js';
 
 const updateStatus = (id, taskDescription, checkIcon, taskCheck) => {
-  let currentTask;
+  let currentTask = new Task();
   const tasksArray = getTasksArray();
   const newTasksArray = tasksArray.map((task) => {
     if (task.id === id) {

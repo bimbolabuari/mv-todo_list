@@ -1,4 +1,4 @@
-const reorderTasks = (tasksArray, moveId, placedId) => {
+export const reorderTasks = (tasksArray, moveId, placedId) => {
   const moveElementIndex = tasksArray.findIndex((element) => element.id === moveId);
   const moveElement = tasksArray[moveElementIndex];
   let newTaskArray = [];

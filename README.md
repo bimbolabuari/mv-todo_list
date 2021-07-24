@@ -26,6 +26,12 @@
 
 ### Development (Running locally)
 
+- Run test
+```
+npm run test
+
+```
+
 - Clone the project
 
 ```bash
