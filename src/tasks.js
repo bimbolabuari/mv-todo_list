@@ -12,11 +12,12 @@ export const Task = (taskData) => {
   const {
     description, completedStatus = false, id = generateId(), index = generateIndex(),
   } = taskData;
+
   function changeCompletedStatus() {
     this.completedStatus = !this.completedStatus;
   }
-  function setDescription(newDescription) {
-    this.description = newDescription;
+  function setDescription() {
+    this.description = !this.description;
   }
   return {
     description, completedStatus, id, changeCompletedStatus, setDescription, index,
