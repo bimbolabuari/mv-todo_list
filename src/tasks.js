@@ -1,4 +1,4 @@
-const generateId = () => (Math.random() + 1).toString(36).substring(7);
+import { v4 as uuidv4 } from 'uuid';
 
 const generateIndex = () => {
   if (localStorage.getItem('tasksArray') === null) {
@@ -10,7 +10,7 @@ const generateIndex = () => {
 
 export const Task = (taskData) => {
   const {
-    description, completedStatus = false, id = generateId(), index = generateIndex(),
+    description, completedStatus = false, id = uuidv4(), index = generateIndex(),
   } = taskData;
   function changeCompletedStatus() {
     this.completedStatus = !this.completedStatus;
