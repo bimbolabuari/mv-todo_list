@@ -14,7 +14,7 @@
 
 ## Live Preview
 
-[Github deploy Page](https://bimbolabuari.github.io/mv-todo-list/)
+[Netlify deploy Page](https://deploy-preview-4--bimbola-mv-todo-list.netlify.app/)
 
 ## Author
 
